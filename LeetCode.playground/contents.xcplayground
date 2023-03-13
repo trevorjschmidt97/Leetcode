@@ -10,5 +10,6 @@
         <page name='7. Reverse Integer'/>
         <page name='11. Container With Most Water'/>
         <page name='817. Linked List Components'/>
+        <page name='1332. Remove Palindromic Subsequences'/>
     </pages>
 </playground>
