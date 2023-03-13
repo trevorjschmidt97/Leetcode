@@ -9,5 +9,6 @@
         <page name='704. Binary Search'/>
         <page name='7. Reverse Integer'/>
         <page name='11. Container With Most Water'/>
+        <page name='817. Linked List Components'/>
     </pages>
 </playground>
