@@ -1,0 +1,4 @@
+module AdventOfCodePackageTests {
+    header "/Users/trevor/Documents/Leetcode/AdventOfCode/.build/arm64-apple-macosx/debug/AdventOfCodePackageTests.build/AdventOfCodePackageTests-Swift.h"
+    requires objc
+}

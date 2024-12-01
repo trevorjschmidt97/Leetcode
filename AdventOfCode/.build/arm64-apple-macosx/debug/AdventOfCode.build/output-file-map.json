@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/trevor/Documents/Leetcode/AdventOfCode/.build/arm64-apple-macosx/debug/AdventOfCode.build/master.swiftdeps"
+  },
+  "/Users/trevor/Documents/Leetcode/AdventOfCode/Sources/AdventOfCode/AdventOfCode.swift": {
+    "dependencies": "/Users/trevor/Documents/Leetcode/AdventOfCode/.build/arm64-apple-macosx/debug/AdventOfCode.build/AdventOfCode.d",
+    "object": "/Users/trevor/Documents/Leetcode/AdventOfCode/.build/arm64-apple-macosx/debug/AdventOfCode.build/AdventOfCode.swift.o",
+    "swiftmodule": "/Users/trevor/Documents/Leetcode/AdventOfCode/.build/arm64-apple-macosx/debug/AdventOfCode.build/AdventOfCode~partial.swiftmodule",
+    "swift-dependencies": "/Users/trevor/Documents/Leetcode/AdventOfCode/.build/arm64-apple-macosx/debug/AdventOfCode.build/AdventOfCode.swiftdeps"
+  }
+}
