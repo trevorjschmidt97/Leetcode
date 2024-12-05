@@ -158,11 +158,76 @@ func exampleDay(_ lines: [[Character]]) -> String {
 }
 
 func day5(_ lines: [[Character]]) -> String {
-    #function + " " + lines.joined(separator: "\n")
+    var adjacencyList: [Int: Set<Int>] = [:]
+    
+    let rules = lines.filter{ $0.contains("|") }
+    for rule in rules {
+        let ruleString = rule.map{ String("\($0)") }.joined(separator: "")
+        let ruleArr = ruleString.components(separatedBy: "|")
+        let firstNum = Int(ruleArr[0])!
+        let secondNum = Int(ruleArr[1])!
+        adjacencyList[firstNum, default: []].insert(secondNum)
+    }
+    
+    let updates = lines.filter{ $0.contains(",") }.map{ $0.map{ String("\($0)") }.joined(separator: "") }
+    var result = 0
+    outer:
+    for update in updates {
+        let updateArr = update.split(separator: ",")
+        for i in 0..<updateArr.count {
+            let iNum = Int(updateArr[i])!
+            for j in i..<updateArr.count {
+                let jNum = Int(updateArr[j])!
+                if adjacencyList[jNum, default: []].contains(iNum) { continue outer }
+            }
+        }
+        let mid = updateArr.count / 2
+        result += Int(updateArr[mid])!
+    }
+    
+    return "\(result)"
 }
 
 func day5Part2(_ lines: [[Character]]) -> String {
-    #function + " " + lines.joined(separator: "\n")
+    var adjacencyList: [Int: Set<Int>] = [:]
+    
+    let rules = lines.filter{ $0.contains("|") }
+    for rule in rules {
+        let ruleString = rule.map{ String("\($0)") }.joined(separator: "")
+        let ruleArr = ruleString.components(separatedBy: "|")
+        let firstNum = Int(ruleArr[0])!
+        let secondNum = Int(ruleArr[1])!
+        adjacencyList[firstNum, default: []].insert(secondNum)
+    }
+    
+    let updates = lines.filter{ $0.contains(",") }.map{ $0.map{ String("\($0)") }.joined(separator: "") }
+    
+    var result = 0
+    
+    for update in updates {
+        var updateArr = update.split(separator: ",").compactMap{ Int($0) }
+        var isCorrect = true
+        
+        for i in 0..<updateArr.count {
+            let iNum = updateArr[i]
+            for j in i..<updateArr.count {
+                let jNum = updateArr[j]
+                if adjacencyList[jNum, default: []].contains(iNum) {
+                    isCorrect = false
+                    break
+                }
+            }
+        }
+        if isCorrect { continue }
+        
+        updateArr.sort { leftNum, rightNum in
+            adjacencyList[rightNum, default: []].contains(leftNum)
+        }
+        let mid = updateArr.count / 2
+        result += updateArr[mid]
+    }
+    
+    return "\(result)"
 }
 
 func day6(_ lines: [[Character]]) -> String {
@@ -329,7 +394,6 @@ let funcs: [(([[Character]]) -> String, ([[Character]]) -> String)] = [
     (exampleDay, exampleDay),
     (exampleDay, exampleDay),
     (exampleDay, exampleDay),
-    (exampleDay, exampleDay),
     (day5, day5Part2),
     (day6, day6Part2),
     (day7, day7Part2),
@@ -353,7 +417,8 @@ let funcs: [(([[Character]]) -> String, ([[Character]]) -> String)] = [
     (day25, day25Part2),
 ]
 
-let workingDirectory = "/Users/trevor/Documents/Leetcode/AdventOfCode/AdventOfCode24/Sources/AdventOfCode24/"
+//let workingDirectory = "/Users/trevorschmidt/Documents/Leetcode/AdventOfCode/AdventOfCode24"
+let workingDirectory = "/Users/trevorschmidt/Documents/Leetcode/AdventOfCode/AdventOfCode24/Sources/AdventOfCode24/"
 let inputsDirectory = workingDirectory + "Inputs/"
 
 private func getLines(of fileName: String) throws -> [String] {
@@ -389,7 +454,7 @@ for argument in userArguments {
     }
 }
 let day = Calendar.current.dateComponents([.day], from: .now).day ?? 0
-let linesOfTheDay: [[Character]] = try getLines(of: "day\(day)\(isTest ? "Test" : "").txt").map{ Array($0) }
+let linesOfTheDay: [[Character]] = try getLines(of: "day\(day + 1)\(isTest ? "Test" : "").txt").map{ Array($0) }
 let dayFuncIndex = day - 1
 let funcOfTheDay = funcs[dayFuncIndex]
 let funcToRun = isPart1 ? funcOfTheDay.0 : funcOfTheDay.1
